@@ -23,6 +23,7 @@ ws = wb.add_sheet('1')
 for row in range(1,sheet.nrows):
     index.append(sheet.cell(row,3).value.encode("cp1251"))
 for i in range(0,len(index)):
+    if index[i].decode("cp1251") == '': print "Empty cell ", i
     index[i] = index[i].decode("cp1251").lstrip()
     index[i] = index[i].replace('-',' ')
     ws.write(i,0,index[i])
@@ -39,21 +40,4 @@ for i in range(len(name)):
     ws.write(i,2,name[i])
 for i in range(len(patronymic)):
     ws.write(i,3,patronymic[i])
-
-'''for i in range(0,len(patronymic)):
-    try:
-        print patronymic[i]
-    except IndexError:
-        print i
-        print surname[i]
-print index[i].split()[1]
-    if index[i].split(' ')[1].startswith(""): index[i].split(' ')[1].lstrip()
-    ws.write(i+1,2,index[i].split(' ')[1])
-    try:
-        ws.write(i+1,3,index[i].split(" ")[2])
-        #print (index[i].split(" ")[2].decode("cp1251")).split("-")[0]
-    except IndexError:
-        ws.write(i+1,3,index[i].split("-")[1])
-    #print index[i].decode("cp1251")
-#print index[6].split(" ")[1].decode("cp1251")'''
 wb.save('dest.xls')
